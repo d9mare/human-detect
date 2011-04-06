@@ -1,0 +1,4 @@
+Standing – u_t intre 0 si 45 de grade ; u_l_* intre 0 si 45 ;  unghiurile celelalte nu conteaza
+Falling  - u_t intre 45 si 80 de grade ; u_l_* intre 45 si 90; unghiurile celelalte nu conteaza
+Lying – u_t intre 80 si 90 de grade ; unghiurile celelalte nu conteaza 
+Sitting – u_t intre 0 si 30 de grade; u_l_*_art1 intre 0 si 90
