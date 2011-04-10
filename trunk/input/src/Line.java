@@ -26,6 +26,8 @@ public class Line {
 		pStart = new Point(p.x, p.y);
 		angle = r;
 		size = s;
+		// e ok facut calculul, iese pe cadrane; masor unghiul fata de verticala in jos 
+		// deci atunci cand sa drept, toate unghiurile sunt 0 |\ 
 		pEnd = new Point(p.x + (size * Math.sin(r.rad)), p.y - (size * Math.cos(r.rad)));
 	}
 	
@@ -40,6 +42,8 @@ public class Line {
 		pStart.x = p.x; pStart.y = p.y;
 		angle = r;
 		size = s;
+		// e ok facut calculul, iese pe cadrane; masor unghiul fata de verticala in jos 
+		// deci atunci cand sa drept, toate unghiurile sunt 0 |\ 
 		pEnd.x = p.x + (size * Math.cos(r.rad));
 		pEnd.y = p.y + (size * Math.sin(r.rad));
 	}
@@ -51,7 +55,7 @@ public class Line {
 	
 	public String toString()
 	{
-		return  this.pStart.x + " " + this.pStart.y + " " + this.pEnd.x + " " + this.pEnd.y ;
+		return "(" + this.pStart.x + " " + this.pStart.y + ")-(" + this.pEnd.x + " " + this.pEnd.y + ")";
 	}
 
 }
