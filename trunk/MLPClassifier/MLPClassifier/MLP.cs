@@ -28,7 +28,7 @@ namespace MLPClassifier
         public void learn(String inputDir)
         {
 
-            string[] filePaths = Directory.GetFiles(@"c:\MyDir\", "*.*", SearchOption.AllDirectories);
+            string[] filePaths = Directory.GetFiles(inputDir, "*.bmp", SearchOption.AllDirectories);
             for (int i = 0; i < filePaths.Length; i++)
             {
                 Feature feat = new Feature(filePaths[i]);
