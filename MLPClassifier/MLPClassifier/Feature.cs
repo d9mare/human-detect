@@ -48,8 +48,8 @@ namespace MLPClassifier
         }
         private void ReadTag (String imageFile)
         {
-            Tag = Convert.ToInt32(((imageFile.Split(".".ToCharArray()))[0].ToString().Split("_".ToCharArray()))[1]);
-            System.Console.WriteLine(((imageFile.Split(".".ToCharArray()))[0].ToString().Split("_".ToCharArray()))[1]);
+            Tag = Convert.ToInt32(((imageFile.Split(".".ToCharArray()))[0].ToString().Split("_".ToCharArray()))[2]);
+            System.Console.WriteLine(((imageFile.Split(".".ToCharArray()))[0].ToString().Split("_".ToCharArray()))[2]);
         }
     }
 }
