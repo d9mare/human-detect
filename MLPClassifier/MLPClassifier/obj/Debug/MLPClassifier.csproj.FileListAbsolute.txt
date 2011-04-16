@@ -1,0 +1,13 @@
+E:\Poli\Master\Proiect cercetare\code\trunk\MLPClassifier\MLPClassifier\obj\Debug\ResolveAssemblyReference.cache
+E:\Poli\Master\Proiect cercetare\code\trunk\MLPClassifier\MLPClassifier\bin\Debug\MLPClassifier.exe
+E:\Poli\Master\Proiect cercetare\code\trunk\MLPClassifier\MLPClassifier\bin\Debug\MLPClassifier.pdb
+E:\Poli\Master\Proiect cercetare\code\trunk\MLPClassifier\MLPClassifier\bin\Debug\AForge.dll
+E:\Poli\Master\Proiect cercetare\code\trunk\MLPClassifier\MLPClassifier\bin\Debug\AForge.Neuro.dll
+E:\Poli\Master\Proiect cercetare\code\trunk\MLPClassifier\MLPClassifier\bin\Debug\AForge.Math.dll
+E:\Poli\Master\Proiect cercetare\code\trunk\MLPClassifier\MLPClassifier\bin\Debug\AForge.Genetic.dll
+E:\Poli\Master\Proiect cercetare\code\trunk\MLPClassifier\MLPClassifier\bin\Debug\AForge.Math.xml
+E:\Poli\Master\Proiect cercetare\code\trunk\MLPClassifier\MLPClassifier\bin\Debug\AForge.Genetic.xml
+E:\Poli\Master\Proiect cercetare\code\trunk\MLPClassifier\MLPClassifier\bin\Debug\AForge.xml
+E:\Poli\Master\Proiect cercetare\code\trunk\MLPClassifier\MLPClassifier\bin\Debug\AForge.Neuro.xml
+E:\Poli\Master\Proiect cercetare\code\trunk\MLPClassifier\MLPClassifier\obj\Debug\MLPClassifier.exe
+E:\Poli\Master\Proiect cercetare\code\trunk\MLPClassifier\MLPClassifier\obj\Debug\MLPClassifier.pdb
