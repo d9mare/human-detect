@@ -15,39 +15,39 @@ public class Main {
 		int i = 0;
 		double bodyA =  Math.PI/180;
 		
-		/*p.makeStanding();
+		p.makeStanding();
 		i = 0;
 		while (p.moveStanding(bodyA, 3*bodyA, 2*bodyA,0 , 0, 0, 0, 0, 0) == 0)
 		{
-			output.draw("images/standing/"+i+".bmp", p);
+			output.draw("../../training_set/standing/"+i+"_3.bmp", p);
 			i++;
 		}
 		
 		p.makeSitting();
 		i = 0;
-		output.draw("images/sitting/"+i+".bmp", p);
+		output.draw("../../training_set/sitting/"+i+"_2.bmp", p);
 		while (p.moveSitting(bodyA, 0, 0, 0, 0, 0, 0, 0, 0) == 0)
 		{
-			output.draw("images/sitting/"+i+".bmp", p);
+			output.draw("../../training_set/sitting/"+i+"_2.bmp", p);
 			i++;
 		}		
 		
 		p.makeLying();
 		i = 0;
-		output.draw("images/lying/"+i+".bmp", p);
+		output.draw("../../training_set/lying/"+i+"_1.bmp", p);
 		while (p.moveLying(bodyA, 0, 0, 0, 0, 0, 0, 0, 0) == 0)
 		{
-			output.draw("images/lying/"+i+".bmp", p);
+			output.draw("../../training_set/lying/"+i+"_1.bmp", p);
 			i++;
 		}
-		*/
+		
 		p.makeFalling();
 		i = 0;
-		output.draw("images/falling/"+i+".bmp", p);
+		output.draw("../../training_set/falling/"+i+"_0.bmp", p);
 		
 		while (p.moveFalling(bodyA, 0, 0, 0, 0, 0, 0, 0, 0) == 0)
 		{
-			output.draw("images/falling/"+i+".bmp", p);
+			output.draw("../../training_set/falling/"+i+"_0.bmp", p);
 			i++;
 		}
 	}
@@ -57,7 +57,7 @@ class Draw
 {
 	BufferedImage img;
 	Graphics2D graphics;
-	final int windowSize = 300;
+	final int windowSize = 200;
 	
 	public Draw()
 	{
