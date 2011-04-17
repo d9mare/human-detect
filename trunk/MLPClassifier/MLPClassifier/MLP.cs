@@ -22,7 +22,8 @@ namespace MLPClassifier
 
         public void loadFromFile(String fileName)
         {
-
+            NeuralNet = (ActivationNetwork)ActivationNetwork.Load(fileName);
+            TagCount = NeuralNet.Output.Length; 
         }
 
         public void learn(String inputDir)
