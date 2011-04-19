@@ -1,10 +1,11 @@
+import java.util.*;
 
 public class Person {
 	
 	final double bodyLen = 50 ;
 	final double partLen = 25;
 	final double PI = Math.PI;
-	
+	final int N = 9;
 	static String newline = System.getProperty("line.separator");
 	
 	/*
@@ -14,21 +15,23 @@ public class Person {
 	 * lf* : left foot
 	 * rf* : right foot
 	 */
-	Line body, leftHandF, leftHandS, rightHandF, rightHandS, leftFootF, leftFootS, rightFootF, rightFootS;
+	//Line body, leftHandF, leftHandS, rightHandF, rightHandS, leftFootF, leftFootS, rightFootF, rightFootS;
+	Vector<Line> body;
 	/*
 	 * same, but for the angles of articulation; the angle it's measured by the vertical axe
 	 */
-	Angle ab, leftHandFa, leftHandSa, rightHandFa, rightHandSa, leftFootFa, leftFootSa, rightFootFa, rightFootSa;
+	//Angle ab, leftHandFa, leftHandSa, rightHandFa, rightHandSa, leftFootFa, leftFootSa, rightFootFa, rightFootSa;
+	Vector<Angle> angles;
 
 	public Person()
 	{
-		body = new Line();
-		leftHandF = new Line(); leftHandS = new Line(); rightHandF = new Line(); rightHandS = new Line();
-		leftFootF = new Line(); leftFootS = new Line(); rightFootF = new Line(); rightFootS = new Line();
-		
-		ab = new Angle();
-		leftHandFa = new Angle(); leftHandSa = new Angle(); rightHandFa = new Angle(); rightHandSa = new Angle();
-		leftFootFa = new Angle(); leftFootSa = new Angle(); rightFootFa = new Angle(); rightFootSa = new Angle();
+		body = new Vector<Line>();
+		angles = new Vector<Angle>();
+		for (int i = 0; i < N;i++)
+		{
+			body.add(new Line());
+			angles.add(new Angle());
+		}
 	}
 	
 	public String toString()
