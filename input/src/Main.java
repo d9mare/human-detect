@@ -15,6 +15,7 @@ public class Main {
 		int i = 0;
 		double bodyA =  Math.PI/180;
 		
+		
 		p.makeStanding();
 		i = 0;
 		while (p.moveStanding(bodyA, 3*bodyA, 2*bodyA,0 , 0, 0, 0, 0, 0) == 0)
