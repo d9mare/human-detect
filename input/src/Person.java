@@ -16,7 +16,7 @@ public class Person {
 	 * rf* : right foot
 	 */
 	//Line body, leftHandF, leftHandS, rightHandF, rightHandS, leftFootF, leftFootS, rightFootF, rightFootS;
-	Vector<Line> body;
+	Vector<Line> bodyLines;
 	/*
 	 * same, but for the angles of articulation; the angle it's measured by the vertical axe
 	 */
@@ -25,11 +25,11 @@ public class Person {
 
 	public Person()
 	{
-		body = new Vector<Line>();
+		bodyLines = new Vector<Line>();
 		angles = new Vector<Angle>();
 		for (int i = 0; i < N;i++)
 		{
-			body.add(new Line());
+			bodyLines.add(new Line());
 			angles.add(new Angle());
 		}
 	}
@@ -44,20 +44,33 @@ public class Person {
 		 * third line : legt coordinates  (left, right)
 		 * empty line
 		 */
-		st = body.toString() + newline;
-		st += leftHandF.toString() + " " + leftHandS.toString() + " " + rightHandF.toString() + " " + rightHandS.toString() + newline;
-		st += leftFootF.toString() + " " + leftFootS.toString() + " " + rightFootF.toString() + " " + rightFootS.toString() + newline;
+		st = bodyLines.elementAt(0).toString() + newline;
+		for (int i = 1; i < N; i++)
+		st += bodyLines.elementAt(i).toString() + newline;
 		
 		return st;
 		
 	}
 	
 	
-	private void makeDefault(double bodyA, double lhf, double lhs, double rhf, double rhs,
-			   double lff, double lfs, double rff, double rfs)
+	private void makeDefault(double[] angles
+			/*double lhf, double lhs, double rhf, double rhs,
+			   double lff, double lfs, double rff, double rfs*/)
 	{
-		body.set(new Point(2*partLen + bodyLen, 2*partLen + bodyLen),new Angle(bodyA), bodyLen);
+		Line body = bodyLines.elementAt(0);
 		
+		body.set(new Point(2*partLen + bodyLen, 2*partLen + bodyLen),new Angle(angles[0]), bodyLen);
+		
+		for (int i = 1; i < N; i = i + 2)
+		{
+			bodyLines.elementAt(i).set(new Point(body.pStart.x, body.pStart.y), new Angle(angles[i]), partLen);
+			
+		}
+		for (int i = 2; i < N; i = i + 2)
+		{
+			bodyLines.elementAt(i).set(new Point(body.pStart.x, body.pStart.y), new Angle(angles[i]), partLen);
+			
+		}
 		leftHandF.set(new Point(body.pStart.x, body.pStart.y),new Angle(lhf), partLen);
 		leftHandS.set(new Point(leftHandF.pEnd.x, leftHandF.pEnd.y),new Angle(lhs), partLen);
 		rightHandF.set(new Point(body.pStart.x, body.pStart.y),new Angle(rhf), partLen);
@@ -68,9 +81,11 @@ public class Person {
 		rightFootF.set(new Point(body.pEnd.x, body.pEnd.y),new Angle(rff), partLen);
 		rightFootS.set(new Point(leftFootF.pEnd.x, leftFootF.pEnd.y),new Angle(rfs), partLen);
 		
-		ab.set(bodyA);
-		leftHandFa.set(lhf); leftHandSa.set(lhs); rightHandFa.set(rhf); rightHandSa.set(rhs);
-		leftFootFa.set(lff); leftFootSa.set(lfs); rightFootFa.set(rff); rightFootSa.set(rfs);
+		for (int i = 0; i < N;i++)
+		{
+			this.angles.elementAt(i).set(angles[i]);
+		}
+		
 	}
 	
 	private void moveDefault(double bodyA, double lhf, double lhs, double rhf, double rhs,
