@@ -1,4 +1,11 @@
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
+
+import javax.imageio.ImageIO;
 
 public class Person {
 	
@@ -6,6 +13,8 @@ public class Person {
 	final double partLen = 25;
 	final double PI = Math.PI;
 	final int N = 9;
+	final Color[] colors = {Color.PINK, Color.RED, Color.RED, Color.RED, Color.RED, Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN};
+	
 	static String newline = System.getProperty("line.separator");
 	
 	/*
@@ -22,16 +31,18 @@ public class Person {
 	 */
 	//Angle ab, leftHandFa, leftHandSa, rightHandFa, rightHandSa, leftFootFa, leftFootSa, rightFootFa, rightFootSa;
 	Vector<Angle> angles;
-
-	public Person()
+	
+	       
+	public Person(double angles[])
 	{
 		bodyLines = new Vector<Line>();
-		angles = new Vector<Angle>();
+		this.angles = new Vector<Angle>();
 		for (int i = 0; i < N;i++)
 		{
 			bodyLines.add(new Line());
-			angles.add(new Angle());
+			this.angles.add(new Angle());
 		}
+		makeDefault(angles);
 	}
 	
 	public String toString()
@@ -52,7 +63,6 @@ public class Person {
 		
 	}
 	
-	
 	private void makeDefault(double[] angles
 			/*double lhf, double lhs, double rhf, double rhs,
 			   double lff, double lfs, double rff, double rfs*/)
@@ -63,23 +73,16 @@ public class Person {
 		
 		for (int i = 1; i < N; i = i + 2)
 		{
+			if (i < 5)
 			bodyLines.elementAt(i).set(new Point(body.pStart.x, body.pStart.y), new Angle(angles[i]), partLen);
+			else bodyLines.elementAt(i).set(new Point(body.pEnd.x, body.pEnd.y), new Angle(angles[i]), partLen);
 			
 		}
 		for (int i = 2; i < N; i = i + 2)
 		{
-			bodyLines.elementAt(i).set(new Point(body.pStart.x, body.pStart.y), new Angle(angles[i]), partLen);
+			bodyLines.elementAt(i).set(new Point(bodyLines.elementAt(i-1).pEnd.x, bodyLines.elementAt(i-1).pEnd.y), new Angle(angles[i]), partLen);
 			
 		}
-		leftHandF.set(new Point(body.pStart.x, body.pStart.y),new Angle(lhf), partLen);
-		leftHandS.set(new Point(leftHandF.pEnd.x, leftHandF.pEnd.y),new Angle(lhs), partLen);
-		rightHandF.set(new Point(body.pStart.x, body.pStart.y),new Angle(rhf), partLen);
-		rightHandS.set(new Point(rightHandF.pEnd.x, rightHandF.pEnd.y),new Angle(rhs), partLen);
-		
-		leftFootF.set(new Point(body.pEnd.x, body.pEnd.y),new Angle(lff), partLen);
-		leftFootS.set(new Point(leftFootF.pEnd.x, leftFootF.pEnd.y),new Angle(lfs), partLen);
-		rightFootF.set(new Point(body.pEnd.x, body.pEnd.y),new Angle(rff), partLen);
-		rightFootS.set(new Point(leftFootF.pEnd.x, leftFootF.pEnd.y),new Angle(rfs), partLen);
 		
 		for (int i = 0; i < N;i++)
 		{
@@ -88,121 +91,28 @@ public class Person {
 		
 	}
 	
-	private void moveDefault(double bodyA, double lhf, double lhs, double rhf, double rhs,
-	 		 double lff, double lfs, double rff, double rfs)
+	public void draw(String fileName)
 	{
-		ab.set(bodyA);
-		body.set(body.pStart, ab, bodyLen);
+		int windowSize = 200;
+		BufferedImage img = new BufferedImage(windowSize, windowSize, BufferedImage.TYPE_INT_RGB); 
+		Graphics2D graphics = img.createGraphics();
 		
-		leftHandF.pStart.set(body.pStart.x, body.pStart.y);
-		rightHandF.pStart.set(body.pStart.x, body.pStart.y);
+		File outputFile = new File(fileName);
 		
-		leftHandF.set(leftHandF.pStart, new Angle(leftHandFa.rad + lhf), partLen);
-		rightHandF.set(rightHandF.pStart, new Angle(rightHandFa.rad + rhf), partLen);
-		leftHandFa.set(leftHandFa.rad + lhf);
-		rightHandFa.set(rightHandFa.rad + rhf);
+		graphics.clearRect(0, 0, windowSize, windowSize);
 		
-		leftHandS.pStart.set(leftHandF.pEnd.x, leftHandF.pEnd.y);
-		rightHandS.pStart.set(rightHandF.pEnd.x, rightHandF.pEnd.y);
-		
-		leftHandS.set(leftHandS.pStart, new Angle(leftHandSa.rad + lhs), partLen);
-		rightHandS.set(rightHandS.pStart, new Angle(rightHandSa.rad + rhs), partLen);
-		leftHandSa.set(leftHandSa.rad + lhs);
-		rightHandSa.set(rightHandSa.rad + rhs); 
-		
-		leftFootF.pStart.set(body.pEnd.x, body.pEnd.y);
-		rightFootF.pStart.set(body.pEnd.x, body.pEnd.y);
-		
-		leftFootF.set(leftFootF.pStart, new Angle(leftFootFa.rad + lff), partLen);
-		rightFootF.set(rightFootF.pStart, new Angle(rightFootFa.rad + rff), partLen);
-		leftFootFa.set(leftFootFa.rad + lff);
-		rightFootFa.set(rightFootFa.rad + rff);
-		
-		leftFootS.pStart.set(leftFootF.pEnd.x, leftFootF.pEnd.y);
-		rightFootS.pStart.set(rightFootF.pEnd.x, rightFootF.pEnd.y);
-		
-		leftFootS.set(leftFootS.pStart, new Angle(leftFootSa.rad + lfs), partLen);
-		rightFootS.set(rightFootS.pStart, new Angle(rightFootSa.rad + rfs), partLen);
-		leftFootSa.set(leftFootSa.rad + lfs);
-		rightFootSa.set(rightFootSa.rad + rfs); 	 
-	}
-
-	private double to2pi( double value) 
-	{
-		return value > (2 * Math.PI)? (value - Math.floor(value / (2 * Math.PI))) : (value < 0? 2 * Math.PI + value: value);
+		for (int i = 0; i < N; i++)
+		{
+			graphics.setColor(colors[i]);
+			Line line = bodyLines.elementAt(i);
+			graphics.drawLine(windowSize - (int)(line.pStart.x ), windowSize - (int)(line.pStart.y ), windowSize - (int)(line.pEnd.x ), windowSize - (int)(line.pEnd.y) );
+		}
+		try 
+		{
+			ImageIO.write(img, "bmp", outputFile);
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 	
-	public void makeStanding()
-	{
-		makeDefault(3*PI/2,3*PI/2,3*PI/2,3*PI/2,3*PI/2,3*PI/2,3*PI/2,3*PI/2,3*PI/2);
-	}
-	
-	public int moveStanding(double bodyA, double lhf, double lhs, double rhf, double rhs,
-										   double lff, double lfs, double rff, double rfs)
-	{
-		double val = ab.rad + bodyA;
-		
-		if ( (to2pi(val - 3*PI/2) > (PI / 4) && to2pi(val - 3*PI/2) < (7 * PI / 4)) /*||
-			 (to2pi(leftFootFa.rad + lff - 3*PI/2) > PI/4 && to2pi(leftFootFa.rad + lff - 3*PI/2) < (7*PI/4)) ||
-			 (to2pi(rightFootFa.rad + rff - 3*PI/2) > PI/4 && to2pi(rightFootFa.rad + rff - 3*PI/2) < (7*PI/4))*/)				
-			return -1;
-		
-		moveDefault(val,lhf, lhs, rhf, rhs, lff, lfs, rff, rfs);	
-		return 0;
-	}
-	
-	public void makeSitting()
-	{
-		// sitting, all lines are vertical but feet first parts, which are horizontal
-		makeDefault(3*PI/2,3*PI/2,3*PI/2,3*PI/2,3*PI/2, 0,3*PI/2, 0,3*PI/2);
-	}
-	
-	public int moveSitting(double bodyA, double lhf, double lhs, double rhf, double rhs,
-								 		 double lff, double lfs, double rff, double rfs)
-	{
-		double val = ab.rad + bodyA;
-		
-		if ( (to2pi(val) > (7*PI / 4) || to2pi(val) < (5 * PI / 4)) /*||
-				 ((to2pi(leftFootFa.rad + lff) > PI/6) && to2pi(leftFootFa.rad + lff) < 11*PI/6) ||
-				 ((to2pi(rightFootFa.rad + rff) > PI/6) && to2pi(rightFootFa.rad + rff) < 11*PI/6)*/)				
-				return -1;
-			
-		moveDefault(val,lhf, lhs, rhf, rhs, lff, lfs, rff, rfs);		
-		return 0;
-	}
-	
-	public void makeLying()
-	{
-		makeDefault(11 * PI / 6, 0, 0, 0, 0, 0, 0, 0, 0);
-	}
-	
-	public int moveLying(double bodyA, double lhf, double lhs, double rhf, double rhs,
-								 		 double lff, double lfs, double rff, double rfs)
-	{
-		double val = ab.rad + bodyA;
-		if ( to2pi(val) < (11 * PI / 6) && to2pi(val) > 0 )			
-				return -1;
-		
-		moveDefault(val,lhf, lhs, rhf, rhs, lff, lfs, rff, rfs);
-		
-		return 0;
-	}
-	
-	public void makeFalling()
-	{
-		makeDefault(3*PI/4,3*PI/2,3*PI/2,3*PI/2,3*PI/2, 3*PI/4,3*PI/4, 3*PI/4,3*PI/4);
-	}
-	 
-	public int moveFalling(double bodyA, double lhf, double lhs, double rhf, double rhs,
-								 		 double lff, double lfs, double rff, double rfs)
-	{
-		double val = ab.rad + bodyA;
-		if ( to2pi(val) < (3*PI/4) || to2pi(val) > 17*PI/18 )			
-				return -1;
-		
-		moveDefault(val,lhf, lhs, rhf, rhs, lff, lfs, rff, rfs);
-		
-		return 0;
-	}
-
 }

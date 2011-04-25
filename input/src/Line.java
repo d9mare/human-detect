@@ -42,12 +42,14 @@ public class Line {
 		pStart.x = p.x; pStart.y = p.y;
 		angle = r;
 		size = s;
-		// e ok facut calculul, iese pe cadrane; masor unghiul fata de verticala in jos 
-		// deci atunci cand sa drept, toate unghiurile sunt 0 |\ 
 		pEnd.x = p.x + (size * Math.cos(r.rad));
 		pEnd.y = p.y + (size * Math.sin(r.rad));
 	}
-	
+	public void setAngle (Angle r)
+	{
+		pEnd.x = pStart.x + (size * Math.cos(r.rad));
+		pEnd.y = pStart.y + (size * Math.sin(r.rad));
+	}
 	public void setSize(double s)
 	{
 		this.size = s;
