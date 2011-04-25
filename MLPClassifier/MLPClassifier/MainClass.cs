@@ -10,10 +10,23 @@ namespace MLPClassifier
     {
         static void Main(string[] args)
         {
-            MLP mlp = new MLP(200, 200, new int[] { 1000, 100, 4 });
+            /*MLP mlp = new MLP(200, 200, new int[] { 1000, 100, 4 });
             System.Console.WriteLine("init network");
             mlp.learn(@"e:\Poli\Master\Proiect cercetare\code\trunk\trainingsetext\");
-            mlp.save("neuralnet_ext.xml");
+            mlp.save("neuralnet_ext.xml");*/
+
+            MLP mlp = new MLP("neuralnet.txt");
+            System.Console.WriteLine("NN loaded");
+
+            Feature image = new Feature("117_2.bmp", false);
+            System.Console.WriteLine("picture loaded");
+
+            double[] rez = mlp.compute(image.Pict);
+            System.Console.WriteLine(rez.Length);
+            for (int i = 0; i < rez.Length; i++)
+                System.Console.Write(rez[i].ToString() + " ");
+            
+            System.Console.ReadKey();
         }
     }
 }
