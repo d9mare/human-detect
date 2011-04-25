@@ -35,9 +35,14 @@ namespace MLPClassifier
                 Feature feat = new Feature(filePaths[i]);
                 double[] output = feat.ConvertToTagArray(TagCount);
                 Teacher.Run(feat.Pict, output);
-                System.Console.WriteLine(filePaths[i]);
+                if (i % 512 == 0)
+                System.Console.WriteLine("position"+i%512);
             }
-            NeuralNet.Save("neuralnet.txt");
+        }
+
+        public void save (String file)
+        {
+            NeuralNet.Save(file);
         }
     }
 }

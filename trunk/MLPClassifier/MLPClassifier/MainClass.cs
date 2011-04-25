@@ -12,7 +12,8 @@ namespace MLPClassifier
         {
             MLP mlp = new MLP(200, 200, new int[] { 1000, 100, 4 });
             System.Console.WriteLine("init network");
-            mlp.learn(@"e:\Poli\Master\Proiect cercetare\code\trunk\training_set\");
+            mlp.learn(@"e:\Poli\Master\Proiect cercetare\code\trunk\trainingsetext\");
+            mlp.save("neuralnet_ext.xml");
         }
     }
 }
