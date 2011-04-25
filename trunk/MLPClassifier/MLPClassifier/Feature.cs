@@ -13,9 +13,10 @@ namespace MLPClassifier
         public static int Width;
         public static int Height;
 
-        public Feature(String imageFile)
+        public Feature(String imageFile, bool tagged)
         {
             ReadPicture(imageFile);
+            if (tagged == true)
             ReadTag(imageFile);
         }
         public double[] ConvertToTagArray(int length)

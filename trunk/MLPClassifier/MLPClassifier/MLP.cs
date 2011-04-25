@@ -20,7 +20,11 @@ namespace MLPClassifier
             TagCount = neuronCount.Last();
         }
 
-        public void loadFromFile(String fileName)
+        public MLP (String fileName)
+        {
+            loadFromFile(fileName);
+        }
+        private void loadFromFile(String fileName)
         {
             NeuralNet = (ActivationNetwork)ActivationNetwork.Load(fileName);
             TagCount = NeuralNet.Output.Length; 
@@ -32,7 +36,7 @@ namespace MLPClassifier
             string[] filePaths = Directory.GetFiles(inputDir, "*.bmp", SearchOption.AllDirectories);
             for (int i = 0; i < filePaths.Length; i++)
             {
-                Feature feat = new Feature(filePaths[i]);
+                Feature feat = new Feature(filePaths[i], true);
                 double[] output = feat.ConvertToTagArray(TagCount);
                 Teacher.Run(feat.Pict, output);
                 if (i % 512 == 0)
@@ -43,6 +47,11 @@ namespace MLPClassifier
         public void save (String file)
         {
             NeuralNet.Save(file);
+        }
+
+        public double[] compute(double[] pict)
+        {
+            return NeuralNet.Compute(pict);
         }
     }
 }
