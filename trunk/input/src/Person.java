@@ -9,8 +9,9 @@ import javax.imageio.ImageIO;
 
 public class Person {
 	
-	final double bodyLen = 50 ;
-	final double partLen = 25;
+	final int bodyLen = 20 ;
+	final int partLen = 10;
+	final int WINDOW_SIZE = 4 * bodyLen;
 	final double PI = Math.PI;
 	final int N = 9;
 	final Color[] colors = {Color.PINK, Color.RED, Color.RED, Color.RED, Color.RED, Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN};
@@ -69,7 +70,7 @@ public class Person {
 	{
 		Line body = bodyLines.elementAt(0);
 		
-		body.set(new Point(2*partLen + bodyLen, 2*partLen + bodyLen),new Angle(angles[0]), bodyLen);
+		body.set(new Point(2*bodyLen, 2*bodyLen),new Angle(angles[0]), bodyLen);
 		
 		for (int i = 1; i < N; i = i + 2)
 		{
@@ -93,22 +94,26 @@ public class Person {
 	
 	public void draw(String fileName)
 	{
-		int windowSize = 200;
-		BufferedImage img = new BufferedImage(windowSize, windowSize, BufferedImage.TYPE_INT_RGB); 
+		BufferedImage img = new BufferedImage(WINDOW_SIZE, WINDOW_SIZE, BufferedImage.TYPE_INT_RGB); 
 		Graphics2D graphics = img.createGraphics();
 		
 		File outputFile = new File(fileName);
 		
-		graphics.clearRect(0, 0, windowSize, windowSize);
+		graphics.clearRect(0, 0, WINDOW_SIZE, WINDOW_SIZE);
+		graphics.rotate(Math.PI, WINDOW_SIZE/2, WINDOW_SIZE/2);
+		//graphics.translate(-windowSize/4, -windowSize/4);
+		
 		
 		for (int i = 0; i < N; i++)
 		{
 			graphics.setColor(colors[i]);
 			Line line = bodyLines.elementAt(i);
-			graphics.drawLine(windowSize - (int)(line.pStart.x ), windowSize - (int)(line.pStart.y ), windowSize - (int)(line.pEnd.x ), windowSize - (int)(line.pEnd.y) );
+			graphics.drawLine((int)(line.pStart.x ),(int)(line.pStart.y ), (int)(line.pEnd.x ), (int)(line.pEnd.y ) );
+			
 		}
 		try 
 		{
+			System.out.println(bodyLines.elementAt(0).pStart.x+ " "+bodyLines.elementAt(0).pStart.y);
 			ImageIO.write(img, "bmp", outputFile);
 		} catch (IOException e) {
 			System.err.println(e.getMessage());

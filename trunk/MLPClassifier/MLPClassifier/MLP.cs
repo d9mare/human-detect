@@ -34,14 +34,24 @@ namespace MLPClassifier
         {
 
             string[] filePaths = Directory.GetFiles(inputDir, "*.bmp", SearchOption.AllDirectories);
+            double[][] output = new double[filePaths.Length][];
+            double[][] input = new double[filePaths.Length][];
             for (int i = 0; i < filePaths.Length; i++)
             {
                 Feature feat = new Feature(filePaths[i], true);
-                double[] output = feat.ConvertToTagArray(TagCount);
-                Teacher.Run(feat.Pict, output);
+                input[i] = feat.Pict;
+                output[i] = feat.ConvertToTagArray(TagCount);
                 if (i % 512 == 0)
-                System.Console.WriteLine("position"+i%512);
+                    System.Console.WriteLine("position" + i / 512);
             }
+            int iter = 0;
+            do
+            {
+                double error = Teacher.RunEpoch(input, output);
+                System.Console.WriteLine("error:" + error);
+                iter++;
+
+            } while (iter < 1000);
         }
 
         public void save (String file)
