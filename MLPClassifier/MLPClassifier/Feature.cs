@@ -39,10 +39,10 @@ namespace MLPClassifier
             {
                 for (int j = 0; j < bmp.Width; j++)
                 {
-                    Pict[i * j] = 0;
+                    Pict[i * bmp.Width + j] = 0;
                     if (bmp.GetPixel(i, j) != Color.Black)
                     {
-                        Pict[i * j] = 1;
+                        Pict[i * bmp.Width + j] = 1;
                     }
                 }
             }

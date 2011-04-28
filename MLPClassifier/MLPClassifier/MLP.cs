@@ -13,6 +13,7 @@ namespace MLPClassifier
         public ActivationNetwork NeuralNet;
         public BackPropagationLearning Teacher;
         public int TagCount;
+        static double EPSILON = 0.0000001;
         public MLP (int height, int width, int[] neuronCount)
         {
             NeuralNet = new ActivationNetwork(new SigmoidFunction(2), height * width, neuronCount);
@@ -45,13 +46,16 @@ namespace MLPClassifier
                     System.Console.WriteLine("position" + i / 512);
             }
             int iter = 0;
+            double err ;
+            double error = 0;
             do
             {
-                double error = Teacher.RunEpoch(input, output);
+                err = error;
+                error = Teacher.RunEpoch(input, output);
                 System.Console.WriteLine("error:" + error);
                 iter++;
 
-            } while (iter < 1000);
+            } while (iter < 1000 && Math.Abs(err-error) > EPSILON);
         }
 
         public void save (String file)
