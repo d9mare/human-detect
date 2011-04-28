@@ -7,7 +7,7 @@ public class Main {
 	static final double lowerBase = -PI/36;
 	static final double upperBase = PI/36;
 	
-	static final String path = "training_set_ext/";
+	static final String path = "trainingsetext/";
 	static final double[][] initial = {{3*PI/4+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase, 3*PI/4+lowerBase,3*PI/4+lowerBase, 3*PI/4+lowerBase,3*PI/4+lowerBase},
 									   {0+lowerBase, 0+lowerBase, 0+lowerBase, 0+lowerBase, 0+lowerBase, 0+lowerBase, 0+lowerBase, 0+lowerBase, 0+lowerBase},
 									   {3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase, 0+lowerBase,3*PI/2+lowerBase, 0+lowerBase,3*PI/2+lowerBase},
@@ -26,6 +26,9 @@ public class Main {
 			(initial[i], limits[i], path+typeName[i],i, PI/18);
 			gen.generate();
 		}
+		/*Generator gen = new Generator
+		(initial[2], limits[2], path+typeName[2],2, PI/18);
+		gen.generate();*/
 		
 	}
 }
