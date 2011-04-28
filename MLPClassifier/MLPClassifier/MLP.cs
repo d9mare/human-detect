@@ -13,7 +13,7 @@ namespace MLPClassifier
         public ActivationNetwork NeuralNet;
         public BackPropagationLearning Teacher;
         public int TagCount;
-        static double EPSILON = 0.0000001;
+        static double EPSILON = 0.000001;
         public MLP (int height, int width, int[] neuronCount)
         {
             NeuralNet = new ActivationNetwork(new SigmoidFunction(2), height * width, neuronCount);
