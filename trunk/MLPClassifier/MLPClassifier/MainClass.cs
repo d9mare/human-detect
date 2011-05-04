@@ -14,17 +14,18 @@ namespace MLPClassifier
             bool learn = true;
             if (learn == true)
             {
-                MLP mlp = new MLP(40, 40, new int[] { 100, 10, 4 });
+                MLP mlp = new MLP(20, 20, new int[] { 50, 10, 4 });
                 System.Console.WriteLine("init network");
-                mlp.learn(@"e:\eclipse workspace\FeatGen\trainingsetext\");
+                mlp.learn(@"e:\eclipse workspace\FeatGen\trainingsetext2");
                 mlp.save("neuralnet.txt");
             }
             else
             {
+                //MLP mlp = new MLP(20, 20, new int[] { 50, 10, 4 });
                 MLP mlp = new MLP("neuralnet.txt");
                 System.Console.WriteLine("NN loaded");
 
-                Feature image = new Feature("100_3.bmp", false);
+                Feature image = new Feature("11_2.bmp", false);
                 System.Console.WriteLine("picture loaded");
 
                 double[] rez = mlp.compute(image.Pict);
