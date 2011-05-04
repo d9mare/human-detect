@@ -42,8 +42,8 @@ namespace MLPClassifier
                 Feature feat = new Feature(filePaths[i], true);
                 input[i] = feat.Pict;
                 output[i] = feat.ConvertToTagArray(TagCount);
-                if (i % 512 == 0)
-                    System.Console.WriteLine("position" + i / 512);
+                if (i % 19683 == 0)
+                    System.Console.WriteLine("position" + i / 19683);
             }
             int iter = 0;
             double err ;
@@ -55,7 +55,7 @@ namespace MLPClassifier
                 System.Console.WriteLine("error:" + error);
                 iter++;
 
-            } while (iter < 1000 && Math.Abs(err-error) > EPSILON);
+            } while (iter < 4000 /*&& Math.Abs(err-error) > EPSILON */ && error > 1);
         }
 
         public void save (String file)
