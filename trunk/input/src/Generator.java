@@ -40,6 +40,7 @@ public class Generator {
 			}
 			System.out.println(counter + " " + st);
 			p.draw(dir+"/"+counter+"_"+type+".bmp");
+			
 		}
 		else
 		{

@@ -9,8 +9,8 @@ import javax.imageio.ImageIO;
 
 public class Person {
 	
-	final int bodyLen = 20 ;
-	final int partLen = 10;
+	final int bodyLen = 5 ;
+	final int partLen = 2;
 	final int WINDOW_SIZE = 4 * bodyLen;
 	final double PI = Math.PI;
 	final int N = 9;
@@ -92,7 +92,7 @@ public class Person {
 		
 	}
 	
-	public void draw(String fileName)
+	private void drawTransformed (String fileName, double angle, double x, double y)
 	{
 		BufferedImage img = new BufferedImage(WINDOW_SIZE, WINDOW_SIZE, BufferedImage.TYPE_INT_RGB); 
 		Graphics2D graphics = img.createGraphics();
@@ -100,8 +100,8 @@ public class Person {
 		File outputFile = new File(fileName);
 		
 		graphics.clearRect(0, 0, WINDOW_SIZE, WINDOW_SIZE);
-		graphics.rotate(Math.PI, WINDOW_SIZE/2, WINDOW_SIZE/2);
-		//graphics.translate(-windowSize/4, -windowSize/4);
+		graphics.rotate(angle, WINDOW_SIZE/2, WINDOW_SIZE/2);
+		graphics.translate(x, y);
 		
 		
 		for (int i = 0; i < N; i++)
@@ -113,10 +113,28 @@ public class Person {
 		}
 		try 
 		{
-			System.out.println(bodyLines.elementAt(0).pStart.x+ " "+bodyLines.elementAt(0).pStart.y);
 			ImageIO.write(img, "bmp", outputFile);
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
+		}
+	}
+	public void draw(String fileName)
+	{
+		drawTransformed(fileName, Math.PI, 0, 0);
+	}
+	
+	public void drawAll (String fileName)
+	{
+		for (double i = 0; i < 2*Math.PI; i = i + Math.PI/2)
+		{
+			String[] st = fileName.split("/");
+			String fileName2 = "";
+			for (int j = 0; j < st.length-1;j++)
+			{
+				fileName2 = fileName2 + st[j]+"/";
+			}
+			 fileName2 = fileName2 + (int)(i*2/Math.PI) + "r"+st[st.length-1];
+			drawTransformed(fileName2, i, 0, 0);
 		}
 	}
 	
