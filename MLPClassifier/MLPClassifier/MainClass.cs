@@ -3,40 +3,57 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AForge.Neuro;
-
+using System.IO;
 namespace MLPClassifier
 {
     class MainClass
     {
+        static int  NR_POS = 4;
         static void Main(string[] args)
         {
 
-            bool learn = true;
+            bool learn = false;
+            String[] posStr = {"falling", "lying", "sitting", "standing"};
+            MLP[] mlp = new MLP[NR_POS];
             if (learn == true)
             {
-                MLP mlp = new MLP(20, 20, new int[] { 50, 10, 4 });
-                System.Console.WriteLine("init network");
-                mlp.learn(@"e:\eclipse workspace\FeatGen\trainingsetext2");
-                mlp.save("neuralnet.txt");
+                for (int i = 0; i < NR_POS; i++)
+                {
+                    mlp[i] = new MLP(20, 20, new int[] { 50, 10, 1});
+                    System.Console.WriteLine("init network " + i);
+                    mlp[i].learn(@"e:\Poli\Master\Proiect cercetare\code\trunk\images", i);
+                    mlp[i].save("neuralnet_"+i+".txt");
+                }
+                
             }
             else
             {
-                //MLP mlp = new MLP(20, 20, new int[] { 50, 10, 4 });
-                MLP mlp = new MLP("neuralnet.txt");
-                System.Console.WriteLine("NN loaded");
+                for (int  i = 0; i < NR_POS; i++)
+                {
+                    mlp[i] = new MLP("neuralnet_"+i+".txt");
+                    System.Console.WriteLine("NN loaded "+i);
 
-                Feature image = new Feature("11_2.bmp", false);
-                System.Console.WriteLine("picture loaded");
-
-                double[] rez = mlp.compute(image.Pict);
-                System.Console.WriteLine(rez.Length);
-                for (int i = 0; i < rez.Length; i++)
-                    System.Console.Write(rez[i].ToString() + " ");
+                }
+                string[] filePaths = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.bmp", SearchOption.AllDirectories);
+                for (int k = 0; k < filePaths.Length; k++)
+                {
+                    Feature image = new Feature(filePaths[k], false);
+                    System.Console.WriteLine(filePaths[k]);
+                    for (int i = 0; i < NR_POS; i++)
+                    {
+                        double[] rez = mlp[i].compute(image.Pict);
+                        System.Console.WriteLine("REZULTAT " + i);
+                        for (int j = 0; j < rez.Length; j++)
+                            System.Console.WriteLine(rez[j].ToString() + " ");
+                    }
+                }
+                System.Console.WriteLine("done...");
+                System.Console.Read();
+                
             }
             
             
-            System.Console.WriteLine("done...");
-            System.Console.ReadKey();
+            
         }
     }
 }

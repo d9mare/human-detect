@@ -31,7 +31,7 @@ namespace MLPClassifier
             TagCount = NeuralNet.Output.Length; 
         }
 
-        public void learn(String inputDir)
+        public void learn(String inputDir, int tag)
         {
 
             string[] filePaths = Directory.GetFiles(inputDir, "*.bmp", SearchOption.AllDirectories);
@@ -41,9 +41,9 @@ namespace MLPClassifier
             {
                 Feature feat = new Feature(filePaths[i], true);
                 input[i] = feat.Pict;
-                output[i] = feat.ConvertToTagArray(TagCount);
-                if (i % 19683 == 0)
-                    System.Console.WriteLine("position" + i / 19683);
+                output[i] = feat.ConvertToTagArray(TagCount, tag);
+                if (i % 512 == 0)
+                    System.Console.WriteLine("position" + i / 512);
             }
             int iter = 0;
             double err ;
@@ -55,7 +55,7 @@ namespace MLPClassifier
                 System.Console.WriteLine("error:" + error);
                 iter++;
 
-            } while (iter < 4000 /*&& Math.Abs(err-error) > EPSILON */ && error > 1);
+            } while (iter < 4000 && Math.Abs(err-error) != 0  && error > 1);
         }
 
         public void save (String file)

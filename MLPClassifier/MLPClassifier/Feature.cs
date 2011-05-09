@@ -19,13 +19,13 @@ namespace MLPClassifier
             if (tagged == true)
             ReadTag(imageFile);
         }
-        public double[] ConvertToTagArray(int length)
+        public double[] ConvertToTagArray(int length, int tag)
         {
             double[] tagSet = new double[length];
-            for (int i = 0; i < length; i++)
+            /*for (int i = 0; i < length; i++)
                 tagSet[i] = 0;
-
-            tagSet[Tag] = 1;
+            */
+            tagSet[0] = (Tag == tag ? 1 : 0);
 
             return tagSet;
 
