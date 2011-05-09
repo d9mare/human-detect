@@ -2,28 +2,28 @@
 
 public class Main {
 	static final double PI = Math.PI;
-	static final String[] typeName = {"falling", "lying", "sitting", "standing"};
+	static final String[] TYPE_NAME = {"falling", "lying", "sitting", "standing"};
 	
-	static final double lowerBase = -PI/36;
-	static final double upperBase = PI/36;
+	static final double LOWER_BASE = -PI/18;
+	static final double UPPER_BASE = PI/18;
 	
-	static final String path = "trainingsetext/";
-	static final double[][] initial = {{3*PI/4+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase, 3*PI/4+lowerBase,3*PI/4+lowerBase, 3*PI/4+lowerBase,3*PI/4+lowerBase},
-									   {0+lowerBase, 0+lowerBase, 0+lowerBase, 0+lowerBase, 0+lowerBase, 0+lowerBase, 0+lowerBase, 0+lowerBase, 0+lowerBase},
-									   {3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase, 0+lowerBase,3*PI/2+lowerBase, 0+lowerBase,3*PI/2+lowerBase},
-									   {3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase,3*PI/2+lowerBase}};
+	static final String path = "trainingsetext2/";
+	static final double[][] initial = {{3*PI/4+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE, 3*PI/4+LOWER_BASE,3*PI/4+LOWER_BASE, 3*PI/4+LOWER_BASE,3*PI/4+LOWER_BASE},
+									   {0+LOWER_BASE, 0+LOWER_BASE, 0+LOWER_BASE, 0+LOWER_BASE, 0+LOWER_BASE, 0+LOWER_BASE, 0+LOWER_BASE, 0+LOWER_BASE, 0+LOWER_BASE},
+									   {3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE, 0+LOWER_BASE,3*PI/2+LOWER_BASE, 0+LOWER_BASE,3*PI/2+LOWER_BASE},
+									   {3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE}};
 	
-	static final double[][] limits = {{3*PI/4+upperBase,3*PI/2+upperBase,3*PI/2+upperBase,3*PI/2+upperBase,3*PI/2+upperBase, 3*PI/4+upperBase,3*PI/4+upperBase, 3*PI/4+upperBase,3*PI/4+upperBase},
-									  {0+upperBase, 0+upperBase, 0+upperBase, 0+upperBase, 0+upperBase, 0+upperBase, 0+upperBase, 0+upperBase, 0+upperBase},
-		   							  {3*PI/2+upperBase,3*PI/2+upperBase,3*PI/2+upperBase,3*PI/2+upperBase,3*PI/2+upperBase, 0+upperBase,3*PI/2+upperBase, 0+upperBase,3*PI/2+upperBase},
-		   							{3*PI/2+upperBase,3*PI/2+upperBase,3*PI/2+upperBase,3*PI/2+upperBase,3*PI/2+upperBase,3*PI/2+upperBase,3*PI/2+upperBase,3*PI/2+upperBase,3*PI/2+upperBase}};
+	static final double[][] limits = {{3*PI/4+UPPER_BASE,3*PI/2+UPPER_BASE,3*PI/2+UPPER_BASE,3*PI/2+UPPER_BASE,3*PI/2+UPPER_BASE, 3*PI/4+UPPER_BASE,3*PI/4+UPPER_BASE, 3*PI/4+UPPER_BASE,3*PI/4+UPPER_BASE},
+									  {0+UPPER_BASE, 0+UPPER_BASE, 0+UPPER_BASE, 0+UPPER_BASE, 0+UPPER_BASE, 0+UPPER_BASE, 0+UPPER_BASE, 0+UPPER_BASE, 0+UPPER_BASE},
+		   							  {3*PI/2+UPPER_BASE,3*PI/2+UPPER_BASE,3*PI/2+UPPER_BASE,3*PI/2+UPPER_BASE,3*PI/2+UPPER_BASE, 0+UPPER_BASE,3*PI/2+UPPER_BASE, 0+UPPER_BASE,3*PI/2+UPPER_BASE},
+		   							{3*PI/2+UPPER_BASE,3*PI/2+UPPER_BASE,3*PI/2+UPPER_BASE,3*PI/2+UPPER_BASE,3*PI/2+UPPER_BASE,3*PI/2+UPPER_BASE,3*PI/2+UPPER_BASE,3*PI/2+UPPER_BASE,3*PI/2+UPPER_BASE}};
 	public static void main(String args[])
 	{
 		
-		for (int i = 0; i < typeName.length; i++)
+		for (int i = 0; i < TYPE_NAME.length; i++)
 		{
 			Generator gen = new Generator
-			(initial[i], limits[i], path+typeName[i],i, PI/18);
+			(initial[i], limits[i], path+TYPE_NAME[i],i, PI/18);
 			gen.generate();
 		}
 		/*Generator gen = new Generator
