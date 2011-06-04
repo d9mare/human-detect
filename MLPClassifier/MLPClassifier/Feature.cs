@@ -30,6 +30,16 @@ namespace MLPClassifier
             return tagSet;
 
         }
+        private bool IsSameColor(Color first, Color second)
+        {
+            if (first.A.Equals(second.A)
+            && first.R.Equals(second.R)
+            && first.G.Equals(second.G)
+            && first.B.Equals(second.B))
+                return true;
+            else
+                return false;
+        }
         private void ReadPicture (String imageFile)
         {
             Bitmap bmp = new Bitmap(imageFile);
@@ -40,7 +50,8 @@ namespace MLPClassifier
                 for (int j = 0; j < bmp.Width; j++)
                 {
                     Pict[i * bmp.Width + j] = 0;
-                    if (bmp.GetPixel(i, j) != Color.Black)
+                    Color a = bmp.GetPixel(i, j);
+                    if (IsSameColor( bmp.GetPixel(i, j),(Color.Black)) == false)
                     {
                         Pict[i * bmp.Width + j] = 1;
                     }

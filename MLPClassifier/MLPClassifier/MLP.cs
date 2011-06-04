@@ -16,7 +16,8 @@ namespace MLPClassifier
         static double EPSILON = 0.000001;
         public MLP (int height, int width, int[] neuronCount)
         {
-            NeuralNet = new ActivationNetwork(new SigmoidFunction(2), height * width, neuronCount);
+            NeuralNet = new ActivationNetwork(new SigmoidFunction(2), height * width, neuronCount[0], neuronCount[1], neuronCount[2]); //new ActivationNetwork(new SigmoidFunction(2), height * width, neuronCount);
+            NeuralNet.Randomize();
             Teacher = new BackPropagationLearning(NeuralNet);
             TagCount = neuronCount.Last();
         }
@@ -35,11 +36,19 @@ namespace MLPClassifier
         {
 
             string[] filePaths = Directory.GetFiles(inputDir, "*.bmp", SearchOption.AllDirectories);
-            double[][] output = new double[filePaths.Length][];
-            double[][] input = new double[filePaths.Length][];
-            for (int i = 0; i < filePaths.Length; i++)
+            double[][] output = new double[1000*filePaths.Length][];
+            double[][] input = new double[1000*filePaths.Length][];
+            for (int i = 0; i < 500*filePaths.Length; i++)
             {
-                Feature feat = new Feature(filePaths[i], true);
+                Feature feat = new Feature(filePaths[0], true);
+                input[i] = feat.Pict;
+                output[i] = feat.ConvertToTagArray(TagCount, tag);
+                if (i % 512 == 0)
+                    System.Console.WriteLine("position" + i / 512);
+            }
+            for (int i = 500*filePaths.Length; i < 1000 * filePaths.Length; i++)
+            {
+                Feature feat = new Feature(filePaths[1], true);
                 input[i] = feat.Pict;
                 output[i] = feat.ConvertToTagArray(TagCount, tag);
                 if (i % 512 == 0)
@@ -55,7 +64,7 @@ namespace MLPClassifier
                 System.Console.WriteLine("error:" + error);
                 iter++;
 
-            } while (iter < 4000 && Math.Abs(err-error) != 0  && error > 1);
+            } while (iter < 4000 && Math.Abs(err-error) != 0  && error > 0.5);
         }
 
         public void save (String file)
