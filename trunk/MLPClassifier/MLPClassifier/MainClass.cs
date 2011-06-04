@@ -12,34 +12,38 @@ namespace MLPClassifier
         static void Main(string[] args)
         {
 
-            bool learn = false;
+            bool learn = true;
             String[] posStr = {"falling", "lying", "sitting", "standing"};
             MLP[] mlp = new MLP[NR_POS];
-            if (learn == true)
-            {
-                for (int i = 0; i < NR_POS; i++)
+           // if (learn == true)
+           // {
+                for (int i = 3; i < NR_POS; i++)
                 {
-                    mlp[i] = new MLP(20, 20, new int[] { 50, 10, 1});
+                    mlp[i] = new MLP(30, 30, new int[] { 50, 5, 1});
                     System.Console.WriteLine("init network " + i);
-                    mlp[i].learn(@"e:\Poli\Master\Proiect cercetare\code\trunk\images", i);
+                    mlp[i].learn(@"e:\Poli\Master\Proiect cercetare\code\trunk\images\SMALLTEST", i);
                     mlp[i].save("neuralnet_"+i+".txt");
                 }
+                System.Console.WriteLine("done...");
+                //System.Console.Read();
                 
-            }
-            else
-            {
-                for (int  i = 0; i < NR_POS; i++)
+         //   }
+         //   else
+         //   {
+            /*
+                for (int  i = 3; i < NR_POS; i++)
                 {
                     mlp[i] = new MLP("neuralnet_"+i+".txt");
                     System.Console.WriteLine("NN loaded "+i);
 
                 }
+            */
                 string[] filePaths = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.bmp", SearchOption.AllDirectories);
                 for (int k = 0; k < filePaths.Length; k++)
                 {
                     Feature image = new Feature(filePaths[k], false);
                     System.Console.WriteLine(filePaths[k]);
-                    for (int i = 0; i < NR_POS; i++)
+                    for (int i = 3; i < NR_POS; i++)
                     {
                         double[] rez = mlp[i].compute(image.Pict);
                         System.Console.WriteLine("REZULTAT " + i);
@@ -50,7 +54,7 @@ namespace MLPClassifier
                 System.Console.WriteLine("done...");
                 System.Console.Read();
                 
-            }
+        //    }
             
             
             
