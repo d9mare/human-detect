@@ -8,8 +8,9 @@ public class Generator {
 	private double step;
 	private int counter;
 	private int type;
+	private String genType;
 	
-	public Generator (double[] init, double[] limits, String dir, int type, double step)
+	public Generator (String genType, double[] init, double[] limits, String dir, int type, double step)
 	{
 		this.dir = dir;
 		this.limits = limits;
@@ -18,6 +19,7 @@ public class Generator {
 		this.step = step;
 		counter = 0;
 		this.type = type;
+		this.genType = genType;
 		
 		current = new double[N];
 		for (int i = 0; i < N; i++)
@@ -31,7 +33,7 @@ public class Generator {
 	{
 		if ( k == N)
 		{
-			Person p = new Person(current);
+			Person p = new Person(current, genType);
 			counter++;
 			String st = "";
 			for (int i = 0; i < N;i++)
