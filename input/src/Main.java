@@ -7,7 +7,7 @@ public class Main {
 	static final double LOWER_BASE = -PI/18;
 	static final double UPPER_BASE = PI/18;
 	
-	static final String path = "trainingsetext2/";
+	static final String path = "images/";
 	static final double[][] initial = {{3*PI/4+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE, 3*PI/4+LOWER_BASE,3*PI/4+LOWER_BASE, 3*PI/4+LOWER_BASE,3*PI/4+LOWER_BASE},
 									   {0+LOWER_BASE, 0+LOWER_BASE, 0+LOWER_BASE, 0+LOWER_BASE, 0+LOWER_BASE, 0+LOWER_BASE, 0+LOWER_BASE, 0+LOWER_BASE, 0+LOWER_BASE},
 									   {3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE,3*PI/2+LOWER_BASE, 0+LOWER_BASE,3*PI/2+LOWER_BASE, 0+LOWER_BASE,3*PI/2+LOWER_BASE},
@@ -23,7 +23,7 @@ public class Main {
 		for (int i = 0; i < TYPE_NAME.length; i++)
 		{
 			Generator gen = new Generator
-			(initial[i], limits[i], path+TYPE_NAME[i],i, PI/18);
+			(TYPE_NAME[i], initial[i], limits[i], path+TYPE_NAME[i],i, PI/9);
 			gen.generate();
 		}
 		/*Generator gen = new Generator

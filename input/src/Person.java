@@ -9,12 +9,13 @@ import javax.imageio.ImageIO;
 
 public class Person {
 	
-	final int bodyLen = 5 ;
-	final int partLen = 2;
-	final int WINDOW_SIZE = 4 * bodyLen;
+	final int bodyLen = 10 ;
+	final int partLen = bodyLen/2;
+	final int WINDOW_SIZE = 3*bodyLen;
 	final double PI = Math.PI;
 	final int N = 9;
 	final Color[] colors = {Color.PINK, Color.RED, Color.RED, Color.RED, Color.RED, Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN};
+	private String genType;
 	
 	static String newline = System.getProperty("line.separator");
 	
@@ -34,7 +35,7 @@ public class Person {
 	Vector<Angle> angles;
 	
 	       
-	public Person(double angles[])
+	public Person(double angles[], String genType)
 	{
 		bodyLines = new Vector<Line>();
 		this.angles = new Vector<Angle>();
@@ -43,6 +44,8 @@ public class Person {
 			bodyLines.add(new Line());
 			this.angles.add(new Angle());
 		}
+		
+		this.genType = genType;
 		makeDefault(angles);
 	}
 	
@@ -69,8 +72,28 @@ public class Person {
 			   double lff, double lfs, double rff, double rfs*/)
 	{
 		Line body = bodyLines.elementAt(0);
+		double x, y;
 		
-		body.set(new Point(2*bodyLen, 2*bodyLen),new Angle(angles[0]), bodyLen);
+		if ("falling".equals(genType))
+		{
+			x = WINDOW_SIZE - (WINDOW_SIZE - 2*bodyLen)/2;
+			y = WINDOW_SIZE/2.5;				
+		} 
+		else 
+		{
+			if ("lying".equals(genType))
+			{
+				x = (WINDOW_SIZE - 2*bodyLen)/2;
+				y = WINDOW_SIZE/2;			
+			}
+			else
+			{
+				x = WINDOW_SIZE/2;
+				y = WINDOW_SIZE - (WINDOW_SIZE - 2*bodyLen)/2;
+			}
+		}
+		
+		body.set(new Point(x, y),new Angle(angles[0]), bodyLen);
 		
 		for (int i = 1; i < N; i = i + 2)
 		{
