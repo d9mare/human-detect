@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Accord.Wavelets</name>
+    </assembly>
+    <members>
+        <member name="T:Accord.Wavelets.IWavelet">
+            <summary>
+              Common interface for wavelets algorithms.
+            </summary>
+            
+        </member>
+        <member name="M:Accord.Wavelets.IWavelet.Forward(System.Double[])">
+            <summary>
+              1-D Forward Discrete Wavelet Transform.
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.IWavelet.Forward(System.Double[0:,0:])">
+            <summary>
+              2-D Forward Discrete Wavelet Transform.
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.IWavelet.Backward(System.Double[])">
+            <summary>
+              1-D Backward (Inverse) Discrete Wavelet Transform.
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.IWavelet.Backward(System.Double[0:,0:])">
+            <summary>
+              2-D Backward (Inverse) Discrete Wavelet Transform.
+            </summary>
+        </member>
+        <member name="T:Accord.Wavelets.CDF97">
+            <summary>
+              Cohen-Daubechies-Feauveau Wavelet Transform
+            </summary>
+            
+        </member>
+        <member name="M:Accord.Wavelets.CDF97.#ctor(System.Int32)">
+            <summary>
+              Constructs a new Cohen-Daubechies-Feauveau Wavelet Transform.
+            </summary>
+            <param name="levels">The number of iterations for the 2D transform.</param>
+        </member>
+        <member name="M:Accord.Wavelets.CDF97.Forward(System.Double[])">
+            <summary>
+              1-D Forward Discrete Wavelet Transform.
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.CDF97.Forward(System.Double[0:,0:])">
+            <summary>
+              2-D Forward Discrete Wavelet Transform.
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.CDF97.Backward(System.Double[])">
+            <summary>
+              1-D Backward (Inverse) Discrete Wavelet Transform.
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.CDF97.Backward(System.Double[0:,0:])">
+            <summary>
+              2-D Backward (Inverse) Discrete Wavelet Transform.
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.CDF97.FWT97(System.Double[])">
+            <summary>
+              Forward biorthogonal 9/7 wavelet transform
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.CDF97.IWT97(System.Double[])">
+            <summary>
+              Inverse biorthogonal 9/7 wavelet transform
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.CDF97.FWT97(System.Double[0:,0:],System.Int32)">
+            <summary>
+              Forward biorthogonal 9/7 2D wavelet transform
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.CDF97.IWT97(System.Double[0:,0:],System.Int32)">
+            <summary>
+              Inverse biorthogonal 9/7 2D wavelet transform
+            </summary>
+        </member>
+        <member name="T:Accord.Wavelets.Haar">
+            <summary>
+              Haar Wavelet Transform
+            </summary>
+            <remarks>
+              References:
+              - http://www.cs.ucf.edu/~mali/haar/
+            </remarks>
+            
+        </member>
+        <member name="M:Accord.Wavelets.Haar.#ctor(System.Int32)">
+            <summary>
+              Constructs a new Haar Wavelet Transform.
+            </summary>
+            <param name="levels">The number of iterations for the 2D transform.</param>
+        </member>
+        <member name="M:Accord.Wavelets.Haar.Forward(System.Double[])">
+            <summary>
+              1-D Forward Discrete Wavelet Transform.
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.Haar.Backward(System.Double[])">
+            <summary>
+              1-D Backward (Inverse) Discrete Wavelet Transform.
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.Haar.Forward(System.Double[0:,0:])">
+            <summary>
+              2-D Forward Discrete Wavelet Transform.
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.Haar.Backward(System.Double[0:,0:])">
+            <summary>
+              2-D Backward (Inverse) Discrete Wavelet Transform.
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.Haar.FWT(System.Double[])">
+            <summary>
+              Discrete Haar Wavelet Transform
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.Haar.IWT(System.Double[])">
+            <summary>
+              Inverse Haar Wavelet Transform
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Accord.Wavelets.Haar.FWT(System.Double[0:,0:],System.Int32)">
+            <summary>
+              Discrete Haar Wavelet 2D Transform
+            </summary>
+        </member>
+        <member name="M:Accord.Wavelets.Haar.IWT(System.Double[0:,0:],System.Int32)">
+            <summary>
+              Inverse Haar Wavelet 2D Transform
+            </summary>
+        </member>
+    </members>
+</doc>

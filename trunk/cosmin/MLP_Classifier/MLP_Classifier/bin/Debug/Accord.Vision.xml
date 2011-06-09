@@ -1,0 +1,739 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Accord.Vision</name>
+    </assembly>
+    <members>
+        <member name="T:Accord.Vision.Detection.IObjectDetector">
+            <summary>
+              Object detector interface.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Detection.IObjectDetector.ProcessFrame(AForge.Imaging.UnmanagedImage)">
+            <summary>
+              Process a new video frame.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.IObjectDetector.DetectedObjects">
+            <summary>
+              Gets the location of the detected objects.
+            </summary>
+        </member>
+        <member name="T:Accord.Vision.Detection.HaarCascadeStage">
+            <summary>
+              Haar Cascade Classifier Stage.
+            </summary>
+            <remarks>
+              A Haar Cascade Classifier is composed of several stages. Each stage
+              contains a set of classifier trees used in the decisioning process.
+            </remarks>
+            
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarCascadeStage.#ctor">
+            <summary>
+              Constructs a new Haar Cascade Stage.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarCascadeStage.#ctor(System.Double)">
+            <summary>
+              Constructs a new Haar Cascade Stage.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarCascadeStage.Classify(Accord.Imaging.IntegralImage2,System.Int32,System.Int32,System.Double)">
+            <summary>
+              Classifies an image as having the searched object or not.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarCascadeStage.Trees">
+            <summary>
+              Gets or sets the feature trees and its respective
+              feature tree nodes which compose this stage.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarCascadeStage.Threshold">
+            <summary>
+              Gets or sets the threshold associated with this stage,
+              i.e. the minimum value the classifiers should output
+              to decide if the image contains the object or not.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarCascadeStage.ParentIndex">
+            <summary>
+              Gets the index of the parent stage from this stage.
+              This property is not actually used but is part of
+              the XML definition of the cascade classifier.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarCascadeStage.NextIndex">
+            <summary>
+              Gets the index of the next stage from this stage.
+              This property is not actually used but is part of
+              the XML definition of the cascade classifier.
+            </summary>
+        </member>
+        <member name="T:Accord.Vision.Detection.HaarCascadeStagesRoot">
+            <summary>
+              Haar Cascade Serialization Root. This class is used
+              only for XML serialization/deserialization.
+            </summary>
+            
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarCascadeStagesRoot.Stages">
+            <summary>
+              The stages retrieved after deserialization.
+            </summary>
+        </member>
+        <member name="T:Accord.Vision.Detection.HaarCascadeClassifier">
+            <summary>
+              Cascade classifier based on Haar-like rectangular features.
+            </summary>
+            
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarCascadeClassifier.#ctor(System.Int32,System.Int32,Accord.Vision.Detection.HaarCascadeStage[])">
+            <summary>
+              Constructs a new Haar Cascade Classifier.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarCascadeClassifier.Compute(Accord.Imaging.IntegralImage2,System.Drawing.Rectangle)">
+            <summary>
+              Detects the presence of an object in a given window.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarCascadeClassifier.checkTiltedFeatures(Accord.Vision.Detection.HaarCascadeStage[])">
+            <summary>
+              Checks if the classifier contains tilted (rotated) features
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarCascadeClassifier.FromXml(System.IO.TextReader)">
+            <summary>
+              Loads a HaarCascadeClassifier from a OpenCV-compatible XML file.
+            </summary>
+            <param name="stringReader">
+               A <see cref="T:System.IO.StringReader"/> containing the file stream
+               for the xml definition of the classifier to be loaded.</param>
+            <returns>The HaarCascadeClassifier loaded from the file.</returns>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarCascadeClassifier.Stages">
+            <summary>
+              Gets the stages of the cascade classifier.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarCascadeClassifier.Width">
+            <summary>
+              Gets the base window's width for this cascade classifier.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarCascadeClassifier.Height">
+            <summary>
+              Gets the base window's height for this cascade classifier.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarCascadeClassifier.HasTiltedFeatures">
+            <summary>
+              Gets whether whis classifier contains tilted
+              (rotated) features or not.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarCascadeClassifier.Scale">
+            <summary>
+              Gets or sets the current window scale for this cascade classifier.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarCascadeClassifier.DefaultFaceClassifier">
+            <summary>
+              Returns the default face classifier based on the
+              <c>haarcascade_frontalface_alt.xml</c> definition file from OpenCV.
+            </summary>
+            <returns>A HaarCascadeClassifier for face detection.</returns>
+        </member>
+        <member name="T:Accord.Vision.Detection.ObjectDetectorSearchMode">
+            <summary>
+              Object detector options for the search procedure.
+            </summary>
+        </member>
+        <member name="F:Accord.Vision.Detection.ObjectDetectorSearchMode.Default">
+            <summary>
+              Entire image will be scanned.
+            </summary>
+        </member>
+        <member name="F:Accord.Vision.Detection.ObjectDetectorSearchMode.Single">
+            <summary>
+              Only a single object will be retrieved.
+            </summary>
+        </member>
+        <member name="F:Accord.Vision.Detection.ObjectDetectorSearchMode.NoOverlap">
+            <summary>
+              If a object has already been detected inside an area,
+              it will not be scanned twice for inner/overlapping objects.
+            </summary>
+        </member>
+        <member name="T:Accord.Vision.Detection.ObjectDetectorScalingMode">
+            <summary>
+              Object detector options for window scaling.
+            </summary>
+        </member>
+        <member name="F:Accord.Vision.Detection.ObjectDetectorScalingMode.GreaterToSmaller">
+            <summary>
+              Will start with a big search window and
+              gradually scale into smaller ones.
+            </summary>
+        </member>
+        <member name="F:Accord.Vision.Detection.ObjectDetectorScalingMode.SmallerToGreater">
+            <summary>
+              Will start with small search windows and
+              gradually scale into greater ones.
+            </summary>
+        </member>
+        <member name="T:Accord.Vision.Detection.HaarObjectDetector">
+            <summary>
+              Viola-Jones Object Detector based on Haar-like features.
+            </summary>
+            <remarks>
+            <para>
+              The Viola-Jones object detection framework is the first object detection framework
+              to provide competitive object detection rates in real-time proposed in 2001 by Paul
+              Viola and Michael Jones[1][2]. Although it can be trained to detect a variety of
+              object classes, it was motivated primarily by the problem of face detection.</para>
+              
+              <para>
+                References:
+                <list type="bullet">
+                  <item><description>
+                    <a href="http://en.wikipedia.org/wiki/Viola-Jones_object_detection_framework">
+                    http://en.wikipedia.org/wiki/Viola-Jones_object_detection_framework</a>
+                  </description></item>
+                </list>
+              </para>
+            </remarks>
+            
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarObjectDetector.#ctor(Accord.Vision.Detection.HaarCascadeClassifier)">
+            <summary>
+              Constructs a new Haar object detector.
+            </summary>
+            <param name="classifier">
+              The <see cref="T:Accord.Vision.Detection.HaarCascadeClassifier"/> to use in the detector.
+              For the default face detector, you pass 
+              <see cref="P:Accord.Vision.Detection.HaarCascadeClassifier.DefaultFaceClassifier">
+              HaarCascadeClassifier.DefaultFaceClassifier</see>.
+            </param>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarObjectDetector.#ctor(Accord.Vision.Detection.HaarCascadeClassifier,System.Int32)">
+            <summary>
+              Constructs a new Haar object detector.
+            </summary>
+            <param name="classifier">
+              The <see cref="T:Accord.Vision.Detection.HaarCascadeClassifier"/> to use in the detector.
+              For the default face detector, you pass 
+              <see cref="P:Accord.Vision.Detection.HaarCascadeClassifier.DefaultFaceClassifier">
+              HaarCascadeClassifier.DefaultFaceClassifier</see>.
+            </param>
+            <param name="minSize">Minimum window size to consider when searching
+            objects. Default value is <c>15</c>.</param>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarObjectDetector.#ctor(Accord.Vision.Detection.HaarCascadeClassifier,System.Int32,Accord.Vision.Detection.ObjectDetectorSearchMode)">
+            <summary>
+              Constructs a new Haar object detector.
+            </summary>
+            <param name="classifier">
+              The <see cref="T:Accord.Vision.Detection.HaarCascadeClassifier"/> to use in the detector.
+              For the default face detector, you pass 
+              <see cref="P:Accord.Vision.Detection.HaarCascadeClassifier.DefaultFaceClassifier">
+              HaarCascadeClassifier.DefaultFaceClassifier</see>.
+            </param>
+            <param name="minSize">Minimum window size to consider when searching
+            objects. Default value is <c>15</c>.</param>
+            <param name="searchMode">The <see cref="T:Accord.Vision.Detection.ObjectDetectorSearchMode"/> to use
+            during search. Please see documentation of <see cref="T:Accord.Vision.Detection.ObjectDetectorSearchMode"/>
+            for details. Default value is <see cref="F:Accord.Vision.Detection.ObjectDetectorSearchMode.NoOverlap"/></param>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarObjectDetector.#ctor(Accord.Vision.Detection.HaarCascadeClassifier,System.Int32,Accord.Vision.Detection.ObjectDetectorSearchMode,System.Single)">
+            <summary>
+              Constructs a new Haar object detector.
+            </summary>
+            <param name="classifier">
+              The <see cref="T:Accord.Vision.Detection.HaarCascadeClassifier"/> to use in the detector.
+              For the default face detector, you pass 
+              <see cref="P:Accord.Vision.Detection.HaarCascadeClassifier.DefaultFaceClassifier">
+              HaarCascadeClassifier.DefaultFaceClassifier</see>.
+            </param>
+            <param name="minSize">Minimum window size to consider when searching
+            objects. Default value is <c>15</c>.</param>
+            <param name="searchMode">The <see cref="T:Accord.Vision.Detection.ObjectDetectorSearchMode"/> to use
+            during search. Please see documentation of <see cref="T:Accord.Vision.Detection.ObjectDetectorSearchMode"/>
+            for details. Default value is <see cref="F:Accord.Vision.Detection.ObjectDetectorSearchMode.NoOverlap"/></param>
+            <param name="scaleFactor">The re-scaling factor to use when re-scaling the window during search.</param>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarObjectDetector.#ctor(Accord.Vision.Detection.HaarCascadeClassifier,System.Int32,Accord.Vision.Detection.ObjectDetectorSearchMode,System.Single,Accord.Vision.Detection.ObjectDetectorScalingMode)">
+            <summary>
+              Constructs a new Haar object detector.
+            </summary>
+            <param name="classifier">
+              The <see cref="T:Accord.Vision.Detection.HaarCascadeClassifier"/> to use in the detector.
+              For the default face detector, you pass 
+              <see cref="P:Accord.Vision.Detection.HaarCascadeClassifier.DefaultFaceClassifier">
+              HaarCascadeClassifier.DefaultFaceClassifier</see>.
+            </param>
+            <param name="minSize">Minimum window size to consider when searching
+            objects. Default value is <c>15</c>.</param>
+            <param name="searchMode">The <see cref="T:Accord.Vision.Detection.ObjectDetectorSearchMode"/> to use
+            during search. Please see documentation of <see cref="T:Accord.Vision.Detection.ObjectDetectorSearchMode"/>
+            for details. Default is <see cref="F:Accord.Vision.Detection.ObjectDetectorSearchMode.NoOverlap"/>.</param>
+            <param name="scaleFactor">The scaling factor to rescale the window
+            during search. Default value is <c>1.2f</c>.</param>
+            <param name="scalingMode">The <see cref="T:Accord.Vision.Detection.ObjectDetectorScalingMode"/> to use
+            when re-scaling the search window during search. Default is <see cref="F:Accord.Vision.Detection.ObjectDetectorScalingMode.SmallerToGreater"/>.</param>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarObjectDetector.ProcessFrame(System.Drawing.Bitmap)">
+            <summary>
+              Performs object detection on the given frame.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarObjectDetector.ProcessFrame(AForge.Imaging.UnmanagedImage)">
+            <summary>
+              Performs object detection on the given frame.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarObjectDetector.MinSize">
+            <summary>
+              Minimum window size to consider when searching objects.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarObjectDetector.Channel">
+            <summary>
+              Gets or sets the color channel to use when processing color images. 
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarObjectDetector.ScalingFactor">
+            <summary>
+              Gets or sets the scaling factor to rescale the window during search.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarObjectDetector.SearchMode">
+            <summary>
+              Gets or sets the desired searching method.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarObjectDetector.ScalingMode">
+            <summary>
+              Gets or sets the desired scaling method.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarObjectDetector.DetectedObjects">
+            <summary>
+              Gets the detected objects bounding boxes.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarObjectDetector.Classifier">
+            <summary>
+              Gets the internal Cascade Classifier used by this detector.
+            </summary>
+        </member>
+        <member name="T:Accord.Vision.Detection.HaarFeature">
+            <summary>
+              Rectangular Haar-like feature container.
+            </summary>
+            <remarks>
+              References:
+              - http://en.wikipedia.org/wiki/Haar-like_features#Rectangular_Haar-like_features
+            </remarks>
+            
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarFeature.#ctor">
+            <summary>
+              Constructs a new Haar-like feature.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarFeature.#ctor(Accord.Vision.Detection.HaarRectangle[])">
+            <summary>
+              Constructs a new Haar-like feature.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarFeature.#ctor(System.Int32[][])">
+            <summary>
+              Constructs a new Haar-like feature.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarFeature.GetSum(Accord.Imaging.IntegralImage2,System.Int32,System.Int32)">
+            <summary>
+              Gets the sum of the areas of the rectangular features in an integral image.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarFeature.SetScaleAndWeight(System.Single,System.Single)">
+            <summary>
+              Sets the scale and weight of a Haar-like rectangular feature container.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarFeature.Tilted">
+            <summary>
+              Gets or sets whether this feature is tilted.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarFeature.Rectangles">
+            <summary>
+              Gets or sets the Haar rectangles for this feature.
+            </summary>
+        </member>
+        <member name="T:Accord.Vision.Tracking.CamshiftMode">
+            <summary>
+              Modes for the Camshift Tracker.
+            </summary>
+        </member>
+        <member name="F:Accord.Vision.Tracking.CamshiftMode.RGB">
+            <summary>
+              By choosing RGB, the tracker will process raw high-intensity RGB values.
+            </summary>
+        </member>
+        <member name="F:Accord.Vision.Tracking.CamshiftMode.HSL">
+            <summary>
+              By choosing HSL, the tracker will perform a RGB-to-HSL conversion and use the Hue value instead.
+            </summary>
+        </member>
+        <member name="F:Accord.Vision.Tracking.CamshiftMode.Mixed">
+            <summary>
+              By choosing Mixed, the tracker will use HSL with some lightness information.
+            </summary>
+            
+        </member>
+        <member name="T:Accord.Vision.Tracking.Camshift">
+            <summary>
+              Continuously Adaptive Mean Shift (Camshift) Object Tracker
+            </summary>
+            <remarks>
+              Camshift stands for "Continuously Adaptive Mean Shift". It combines the basic
+              Mean Shift algorithm with an adaptive region-sizing step. The kernel is a step
+              function applied to a probability map. The  probability of each image pixel is
+              based on color using a method called histogram backprojection.
+              
+              This implementation is based on the OpenCV and FaceIt CAMSHIFT implementations.
+              
+              References:
+              - http://www.robinhewitt.com/research/track/camshift.html
+              - http://sourceforge.net/projects/opencvlibrary/
+              - http://www.libspark.org/browser/as3/FaceIt/trunk/src/org/libspark/faceit
+            </remarks>
+            
+        </member>
+        <member name="T:Accord.Vision.Tracking.IObjectTracker">
+            <summary>
+              Object tracker interface.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.IObjectTracker.ProcessFrame(AForge.Imaging.UnmanagedImage)">
+            <summary>
+              Process a new video frame.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Tracking.IObjectTracker.TrackingObject">
+            <summary>
+              Gets the current location of the object being tracked.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.Camshift.#ctor">
+            <summary>
+              Constructs a new CamShift tracking algorithm.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.Camshift.#ctor(AForge.Imaging.UnmanagedImage,System.Drawing.Rectangle)">
+            <summary>
+              Constructs a new CamShift tracking algorithm.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.Camshift.#ctor(System.Drawing.Rectangle)">
+            <summary>
+              Constructs a new CamShift tracking algorithm.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.Camshift.#ctor(AForge.Imaging.UnmanagedImage,System.Drawing.Rectangle,Accord.Vision.Tracking.CamshiftMode)">
+            <summary>
+              Constructs a new CamShift tracking algorithm.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.Camshift.#ctor(System.Drawing.Rectangle,Accord.Vision.Tracking.CamshiftMode)">
+            <summary>
+              Constructs a new CamShift tracking algorithm.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.Camshift.Reset">
+            <summary>
+              Resets the object tracking algorithm.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.Camshift.ProcessFrame(AForge.Imaging.UnmanagedImage)">
+            <summary>
+              Processes a new video frame.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.Camshift.GenerateBackprojection">
+            <summary>
+              Generates a image of the histogram backprojection
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.Camshift.GenerateBackprojection(System.Drawing.Imaging.PixelFormat)">
+            <summary>
+              Generates a image of the histogram backprojection
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.Camshift.camshift(AForge.Imaging.UnmanagedImage)">
+            <summary>
+              Camshift algorithm
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.Camshift.meanShift(AForge.Imaging.UnmanagedImage)">
+            <summary>
+              Mean shift algorithm
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.Camshift.computeHistogramRatio(System.Single[],System.Single[],System.Single[])">
+            <summary>
+              Computes the ratio histogram between to histograms
+            </summary>
+            <remarks>
+              http://www.robinhewitt.com/research/track/backproject.html
+            </remarks>
+        </member>
+        <member name="M:Accord.Vision.Tracking.Camshift.backprojection(AForge.Imaging.UnmanagedImage,System.Single[])">
+            <summary>
+              Image histogram back-projection
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.Camshift.createHistogram(AForge.Imaging.UnmanagedImage,System.Drawing.Rectangle)">
+            <summary>
+              Creates a color histogram discarding low intensity colors
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Tracking.Camshift.SearchWindow">
+            <summary>
+              Gets or sets the current search window.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Tracking.Camshift.Mode">
+            <summary>
+              Gets or sets the mode of operation for this tracker.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Tracking.Camshift.HslSaturationRange">
+            <summary>
+              If using HSL mode, specifies the operational saturation range for the tracker.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Tracking.Camshift.HslLightnessRange">
+            <summary>
+              If using HSL mode, specifies the operational lighness range for the tracker.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Tracking.Camshift.TrackingObject">
+            <summary>
+              Gets the location of the object being tracked.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Tracking.Camshift.Map">
+            <summary>
+              Probability map
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Tracking.Camshift.Conservative">
+            <summary>
+              Gets or sets whether the algorithm should scan only the
+              active window or the entire image for histogram ratio.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.Camshift.Moments.#ctor(System.Single[0:,0:],System.Drawing.Rectangle,System.Boolean)">
+            <summary>
+              Constructs the moments from a rectangular image area.
+            </summary>
+        </member>
+        <member name="T:Accord.Vision.Detection.HaarFeatureNode">
+            <summary>
+              Haar Cascade Feature Tree Node.
+            </summary>
+            <remarks>
+              The Feature Node is a node belonging to a feature tree,
+              containing information about child nodes and an associated 
+              <see cref="T:Accord.Vision.Detection.HaarFeature"/>.
+            </remarks>
+            
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarFeatureNode.#ctor">
+            <summary>
+              Constructs a new feature tree node.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarFeatureNode.#ctor(System.Double,System.Double,System.Double,System.Int32[][])">
+            <summary>
+              Constructs a new feature tree node.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarFeatureNode.Threshold">
+            <summary>
+              Gets the threshold for this feature.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarFeatureNode.LeftValue">
+            <summary>
+              Gets the left value for this feature.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarFeatureNode.RightValue">
+            <summary>
+              Gets the right value for this feature.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarFeatureNode.LeftNodeIndex">
+            <summary>
+              Gets the left node index for this feature.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarFeatureNode.RightNodeIndex">
+            <summary>
+              Gets the right node index for this feature.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarFeatureNode.Feature">
+            <summary>
+              Gets the feature associated with this node.
+            </summary>
+        </member>
+        <member name="T:Accord.Vision.Detection.HaarRectangle">
+            <summary>
+              Scalable rectangular area.
+            </summary>
+            <remarks>
+              A rectangle which can be at any position and scale within the original image.
+            </remarks>
+            
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarRectangle.#ctor(System.Int32[])">
+            <summary>
+              Constructs a new Haar-like feature rectangle.
+            </summary>
+            <param name="values">Values for this rectangle.</param>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarRectangle.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Single)">
+            <summary>
+              Constructs a new Haar-like feature rectangle.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarRectangle.ScaleRectangle(System.Single)">
+            <summary>
+              Scales the values of this rectangle.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarRectangle.ScaleWeight(System.Single)">
+            <summary>
+              Scales the weight of this rectangle.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Detection.HaarRectangle.Parse(System.String)">
+            <summary>
+              Converts from a string representation.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarRectangle.X">
+            <summary>
+              Gets or sets the x-coordinate of this Haar feature rectangle.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarRectangle.Y">
+            <summary>
+              Gets or sets the y-coordinate of this Haar feature rectangle.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarRectangle.Width">
+            <summary>
+              Gets or sets the width of this Haar feature rectangle.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarRectangle.Height">
+            <summary>
+              Gets or sets the height of this Haar feature rectangle.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarRectangle.Weight">
+            <summary>
+              Gets or sets the weight of this Haar feature rectangle.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarRectangle.ScaledX">
+            <summary>
+              Gets or sets the scaled x-coordinate of this Haar feature rectangle.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarRectangle.ScaledY">
+            <summary>
+              Gets or sets the scaled y-coordinate of this Haar feature rectangle.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarRectangle.ScaledWidth">
+            <summary>
+              Gets or sets the scaled width of this Haar feature rectangle.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarRectangle.ScaledHeight">
+            <summary>
+              Gets or sets the scaled height of this Haar feature rectangle.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarRectangle.ScaledWeight">
+            <summary>
+              Gets or sets the scaled weight of this Haar feature rectangle.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Detection.HaarRectangle.Area">
+            <summary>
+              Gets the area of this rectangle.
+            </summary>
+        </member>
+        <member name="T:Accord.Vision.Tracking.TrackingObject">
+            <summary>
+              Tracking object to represent an object in a scene.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.TrackingObject.#ctor">
+            <summary>
+              Constructs a new tracking object.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.TrackingObject.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+              Constructs a new tracking object.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.TrackingObject.GetRectangleF">
+            <summary>
+              Gets the rectangle containing the object.
+            </summary>
+        </member>
+        <member name="M:Accord.Vision.Tracking.TrackingObject.GetRectangle">
+            <summary>
+               Gets the rectangle containing the object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Accord.Vision.Tracking.TrackingObject.CenterX">
+            <summary>
+              Gets or sets the center x-coordinate of the object.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Tracking.TrackingObject.CenterY">
+            <summary>
+              Gets or sets the center y-coordinate of the object.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Tracking.TrackingObject.Width">
+            <summary>
+              Gets or sets the width of the object.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Tracking.TrackingObject.Height">
+            <summary>
+              Gets or sets the height of the object.
+            </summary>
+        </member>
+        <member name="P:Accord.Vision.Tracking.TrackingObject.Angle">
+            <summary>
+              Gets or sets the angle of the object.
+            </summary>
+        </member>
+    </members>
+</doc>
